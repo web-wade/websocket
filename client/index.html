@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <input type="text" id="msg" />
+    <button type="button" id="send">发送</button>
+    <script>
+      var ws = new WebSocket('ws://127.0.0.1:3000');
+
+      ws.onopen = function () {
+        console.log('open' + ws.readyState);
+      };
+      ws.onmessage = function (event) {
+        console.log('message' + ws.readyState);
+        console.log(event.data);
+      };
+      ws.onclose = function () {
+        console.log('close' + ws.readyState);
+        console.log('已关闭');
+      };
+      document.getElementById('send').addEventListener('click', function () {
+        ws.close();
+      });
+    </script>
+  </body>
+</html>
