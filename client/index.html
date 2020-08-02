@@ -8,6 +8,7 @@
   <body>
     <input type="text" id="msg" />
     <button type="button" id="send">发送</button>
+    <button type="button" id="close">关闭</button>
     <script>
       var ws = new WebSocket('ws://127.0.0.1:3000');
 
@@ -23,6 +24,11 @@
         console.log('已关闭');
       };
       document.getElementById('send').addEventListener('click', function () {
+        var inputValue = document.getElementById('msg').value;
+        ws.send(inputValue);
+        document.getElementById('msg').value = '';
+      });
+      document.getElementById('close').addEventListener('click', function () {
         ws.close();
       });
     </script>
